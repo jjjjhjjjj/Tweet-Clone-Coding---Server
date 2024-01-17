@@ -34,7 +34,7 @@ export const updateTweet = async (req, res) => {
   const id = req.params.id;
   const { text } = req.body;
 
-  const tweet = await TweetRepository.update(id, text);
+  const tweet = await TweetRepository.getById(id);
 
   if (!tweet) {
     return res.status(404).json({ message: "Not found tweet by id" });
@@ -44,7 +44,9 @@ export const updateTweet = async (req, res) => {
     return res.status(403).json({ message: "Forbidden" });
   }
 
-  res.status(201).json(tweet);
+  await TweetRepository.update(id, text);
+
+  res.status(201).json({ ...tweet, text });
 };
 
 export const removeTweet = async (req, res) => {

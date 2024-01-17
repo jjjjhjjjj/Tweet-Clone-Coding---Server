@@ -1,21 +1,15 @@
 import * as authRepository from "../data/auth.js";
-
-let tweets = [
-  {
-    id: "2",
-    text: "안뇽!",
-    createdAt: Date.now().toString(),
-    userId: "1",
-  },
-  {
-    id: "1",
-    text: "드림코더분들 화이팅!",
-    createdAt: Date.now().toString(),
-    userId: "1687848368285",
-  },
-];
+import {
+  addTweet,
+  deleteTweet,
+  getTweetById,
+  getTweets,
+  updateTweet,
+} from "../database/mongodb.js";
 
 export const getAll = async () => {
+  const tweets = await getTweets();
+
   return Promise.all(
     tweets.map(async (tweet) => {
       const { username, name, url } = await authRepository.findById(
@@ -33,7 +27,7 @@ export const getByUsername = async (username) => {
 };
 
 export const getById = async (id) => {
-  const tweet = tweets.find((tweet) => tweet.id === id);
+  const tweet = await getTweetById(id);
   if (!tweet) return null;
 
   const { username, name, url } = await authRepository.findById(tweet.userId);
@@ -43,27 +37,20 @@ export const getById = async (id) => {
 
 export const create = async (userId, text) => {
   const tweet = {
-    id: Date.now().toString(),
     userId,
     text,
     createdAt: new Date(),
   };
 
-  tweets = [tweet, ...tweets];
-
-  return getById(tweet.id);
+  return addTweet(tweet);
 };
 
 export const update = async (id, text) => {
-  const tweet = tweets.find((tweet) => tweet.id === id);
+  await updateTweet(id, text);
 
-  if (tweet) {
-    tweet.text = text;
-  }
-
-  return getById(tweet.id);
+  return id;
 };
 
 export const remove = async (id) => {
-  tweets = tweets.filter((tweet) => tweet.id !== id);
+  await deleteTweet(id);
 };

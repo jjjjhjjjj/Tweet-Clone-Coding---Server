@@ -8,6 +8,7 @@ import AuthRouterr from "./src/routes/auth.js";
 import TweetsRouter from "./src/routes/tweets.js";
 import { config } from "./config.js";
 import { initSocket } from "./src/network/socket.js";
+import { connectDB } from "./src/database/mongodb.js";
 
 const app = express();
 
@@ -38,6 +39,11 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-const server = app.listen(config.host.port);
+connectDB()
+  .then(() => {
+    //getUserByUsername("one").then(console.log);
+    const server = app.listen(config.host.port);
 
-initSocket(server);
+    initSocket(server);
+  })
+  .catch(console.error);

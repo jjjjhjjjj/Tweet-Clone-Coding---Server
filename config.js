@@ -25,4 +25,10 @@ export const config = {
   cors: {
     allowedOrigin: required("CORS_ALLOW_ORIGIN"),
   },
+  mongoDB: {
+    uri: required("MONGO_DB_URI"),
+    dbName: required("MONGO_DB_NAME", "dwitter"),
+    usersColl: required("MONGO_DB_USERS_COLLECTION", "users"),
+    tweetsColl: required("MONGO_DB_TWEETS_COLLECTION", "dweets"),
+  },
 };
