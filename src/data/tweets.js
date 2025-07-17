@@ -4,6 +4,7 @@ import { findById } from "./auth.js";
 export const getAll = async () => {
   return tweetDB()
     .find()
+    .sort({ createdAt: -1 }) // ← 정렬하고
     .toArray()
     .then((tweets) => tweets.map(formatId));
 };
@@ -31,9 +32,13 @@ export const create = async (userId, text) => {
     url,
   };
 
-  return tweetDB()
-    .insertOne(tweet)
-    .then((result) => result.insertedId.toString());
+  await tweetDB().insertOne(tweet);
+  // .then((result) => {
+  //   console.log(result);
+  //   result.insertedId.toString();
+  // });
+
+  return { ...tweet, id: tweet._id };
 };
 
 export const update = async (id, text) => {
