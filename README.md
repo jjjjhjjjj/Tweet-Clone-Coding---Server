@@ -1,6 +1,5 @@
 # Twitter Clone Server  
-Node.js, Express 기반 트위터 클론 백엔드 API  
-MongoDB와 연동하여 REST API를 설계했습니다.  
+Node.js, Express 기반 트위터 클론 서버 코딩
 <br>
 
 ## 사용한 기술  
@@ -10,10 +9,11 @@ MongoDB와 연동하여 REST API를 설계했습니다.
 ## 주요 기능  
 - JWT 기반 회원가입 / 로그인 기능  
 - 로그인 성공 시 토큰 발급 및 인증 처리  
+- MongoDB 연동을 통한 데이터 저장 및 조회  
 - 전체 트윗 목록 조회  
 - 트윗 작성 / 수정 / 삭제 기능  
 - 내가 작성한 트윗만 필터링하여 조회  
-<br>
+<br> 
 
 ## 프로젝트 구조  
 ```plaintext
