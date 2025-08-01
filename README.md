@@ -18,16 +18,6 @@ Node.js, Express 기반 트위터 클론 서버 코딩
 - 내가 작성한 트윗만 필터링하여 조회  
 <br> 
 
-## 프로젝트 구조  
-```plaintext
-├── controllers  
-├── data  
-├── database  
-├── middleware  
-├── network  
-├── routes  
-```
-<br>
 
 ## 클라이언트 레포지토리  
 - [Twitter Clone Client](https://github.com/yourid/twitter-clone-client)  
